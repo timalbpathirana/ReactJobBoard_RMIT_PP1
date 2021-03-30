@@ -4,7 +4,7 @@ import { RedoRounded, RepeatOutlined } from "@material-ui/icons";
 import userEvent from "@testing-library/user-event";
 import theme from "../../theme/theme";
 
-const skills = ["Javascript", "React.js", "Node.js"];
+// const skills = ["Javascript", "React.js", "Node.js"];
 // below method is the way to access the theme styles
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "6px",
     fontSize: "13px",
     color: "white",
-    backgroundColor: theme.palette.extra.main,
+    backgroundColor: theme.palette.lightSecondary.main,
     padding: theme.spacing(0.75),
     borderRadius: "5px",
     display: "inline-block",
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 2px 5px gba(0,0,0,.25)",
     margin: "0 10px",
     transition: "0.3s",
-    backgroundColor: theme.palette.extra.main,
+    backgroundColor: theme.palette.lightSecondary.main,
     color: "white",
   },
   // hoverCards: {
@@ -54,13 +54,13 @@ export default (props) => {
     <Box p={2} className={classes.wrapper}>
       <Grid container alignItems="center">
         <Grid items xs>
-          <Typography variant="subtitle1">Front End Developer</Typography>
+          <Typography variant="subtitle1">{props.title}</Typography>
           <Typography className={classes.companyName} variant="subtitle2">
-            RMIT University
+            {props.companyName}
           </Typography>
         </Grid>
         <Grid items container xs>
-          {skills.map((skill) => (
+          {props.skills.map((skill) => (
             <Grid key="{skill}" className={classes.skillChip} item>
               {skill}
             </Grid>
@@ -70,7 +70,7 @@ export default (props) => {
           <Grid item>
             <Box mt={2}>
               <Typography variant="subtitle2">
-                Developers/Programmers | 3d ago | On Site
+                {`${props.postedOn}`} | {props.type} | {props.location}
               </Typography>
             </Box>
           </Grid>

@@ -2,7 +2,8 @@ import { createMuiTheme } from "@material-ui/core";
 
 const primary = "#e4247c";
 const secondary = "#0c3c84";
-const extra = "#0c3c84";
+const lightSecondary = "#0c3c84";
+const defaultBlack = "#000000";
 
 export default createMuiTheme({
   typography: {
@@ -15,8 +16,11 @@ export default createMuiTheme({
     secondary: {
       main: secondary,
     },
-    extra: {
-      main: extra,
+    defaultBlack: {
+      main: defaultBlack,
+    },
+    lightSecondary: {
+      main: lightSecondary,
     },
   },
   overrides: {
