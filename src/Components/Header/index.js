@@ -1,9 +1,20 @@
 import React from "react";
-import { Button, Grid, Box, Typography, makeStyles } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  Box,
+  Typography,
+  makeStyles,
+  ButtonGroup,
+} from "@material-ui/core";
 
 const useStyle = makeStyles({
-  img: {
-    src: "./Header/logo.png",
+  wrapper: {
+    // border: "1px solid ",
+    backgroundColor: "white",
+    display: "flex",
+
+    // & referecing to the class and refer to each elemtn on that box componebt
   },
 });
 
@@ -19,12 +30,20 @@ export default (props) => {
               alt="Logo"
               className={classes.useStyle}
             /> */}
-            <Typography variant="h5">
-              Welcome to Workdd - The IT People{" "}
-            </Typography>
-            <Button variant="contained" color="primary" disableLElevation>
-              Post a Job
-            </Button>
+            <Typography variant="h5">Huntr - IT Careers </Typography>
+            <ButtonGroup
+              variant="text"
+              color="primary"
+              aria-label="text primary button group"
+              size="medium"
+            >
+              <Button variant="contained" color="primary" disableLElevationm>
+                Post a Job
+              </Button>
+              <Button variant="contained" color="primary" disableLElevation>
+                Log In
+              </Button>
+            </ButtonGroup>
           </Box>
         </Grid>
       </Grid>
