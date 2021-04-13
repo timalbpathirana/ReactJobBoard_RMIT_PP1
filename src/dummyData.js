@@ -1,7 +1,7 @@
 export default [
   {
     id: 1,
-    postedOn: new Date(),
+    postedOn: "02 Aug 2017 16:21:00 GMT",
     title: "Frontend Developer/Programmer",
     type: "Full time",
     location: "Melbourne On Site",

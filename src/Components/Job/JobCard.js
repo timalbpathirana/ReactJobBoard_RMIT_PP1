@@ -3,6 +3,7 @@ import { Button, Grid, Box, Typography, makeStyles } from "@material-ui/core";
 import { RedoRounded, RepeatOutlined } from "@material-ui/icons";
 import userEvent from "@testing-library/user-event";
 import theme from "../../theme/theme";
+import { differenceInHours, differenceInMinutes } from "date-fns";
 
 // const skills = ["Javascript", "React.js", "Node.js"];
 // below method is the way to access the theme styles
@@ -49,6 +50,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default (props) => {
+  // function formatDate() {
+  //   const str = props.postedOn;
+  //   const res = str.split(" ");
+  //   console.log(res[1]);
+  // }
+
   const classes = useStyles();
   return (
     <Box p={2} className={classes.wrapper}>
@@ -70,7 +77,8 @@ export default (props) => {
           <Grid item>
             <Box mt={2}>
               <Typography variant="subtitle2">
-                {`${props.postedOn}`} | {props.type} | {props.location}
+                {differenceInHours(Date.now(), props.postedOn)} | {props.type} |{" "}
+                {props.location}
               </Typography>
             </Box>
           </Grid>
