@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Grid,
@@ -7,6 +7,7 @@ import {
   makeStyles,
   ButtonGroup,
 } from "@material-ui/core";
+import NewJobModal from "../Job/NewJobModal";
 
 const useStyle = makeStyles({
   wrapper: {
@@ -19,17 +20,19 @@ const useStyle = makeStyles({
 });
 
 export default (props) => {
+  const [state, setState] = useState(false);
+  const changeState = () => {
+    setState(true);
+  };
+  const setStateOnClose = () => {
+    setState(false);
+  };
   const classes = useStyle();
   return (
     <Box py={8} bgcolor="secondary.main" color="white">
       <Grid container justify="center">
         <Grid items xs={10}>
           <Box display="flex" justifyContent="space-between">
-            {/* <img
-              src={"./Components/Header/logo.png"}
-              alt="Logo"
-              className={classes.useStyle}
-            /> */}
             <Typography variant="h5">Huntr - IT Careers </Typography>
             <ButtonGroup
               variant="text"
@@ -37,7 +40,12 @@ export default (props) => {
               aria-label="text primary button group"
               size="medium"
             >
-              <Button variant="contained" color="primary" disableLElevationm>
+              <Button
+                variant="contained"
+                color="primary"
+                disableLElevationm
+                onClick={changeState}
+              >
                 Post a Job
               </Button>
               <Button variant="contained" color="primary" disableLElevation>
@@ -47,6 +55,15 @@ export default (props) => {
           </Box>
         </Grid>
       </Grid>
+      <div>
+        <NewJobModal
+          stateChange={state}
+          changeStateOnClose={(newState) => setState(newState)}
+        />
+      </div>
     </Box>
   );
 };
+
+// There are the links on how to pass props from child to parent
+// You cannot pass props from child to parent, instead, you pass a function and update that function on parent and then get the value using props down to child
