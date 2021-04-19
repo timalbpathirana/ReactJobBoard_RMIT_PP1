@@ -6,6 +6,7 @@ import SearchBar from "./Components/SearchBar";
 import JobCard from "./Components/Job/JobCard";
 import NewJobModal from "./Components/Job/NewJobModal";
 import jobData from "./dummyData";
+import Login from "./Components/login.js/Login";
 
 export default () => {
   return (
@@ -20,6 +21,10 @@ export default () => {
           ))}
         </Grid>
       </Grid>
+      <div>
+        <Login />
+      </div>
     </ThemeProvider>
   );
 };
+// source - https://www.youtube.com/watch?v=L2RnP5vhbdg

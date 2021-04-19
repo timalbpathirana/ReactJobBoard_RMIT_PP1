@@ -54,7 +54,7 @@ export default (props) => {
   //   const str = props.postedOn;
   //   const res = str.split(" ");
   //   console.log(res[1]);
-  // }
+  //}
 
   const classes = useStyles();
   return (
