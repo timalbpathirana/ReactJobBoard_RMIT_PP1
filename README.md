@@ -1,4 +1,4 @@
-# Welcome to Huntr - IT Careers 
+# Welcome to Huntr - Tradie Careers 
 
 ### This is a final year capstone group project by,
 1. Michael Tomaselli    - Scrum Master
