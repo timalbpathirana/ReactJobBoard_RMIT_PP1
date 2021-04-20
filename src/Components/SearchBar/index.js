@@ -40,8 +40,13 @@ export default (props) => {
       </Select>
       {/* this is the work mode*/}
       <Select disableUnderline="true" variant="filled" defaultValue="On Site">
-        <MenuItem value="On Site"> On Site </MenuItem>
-        <MenuItem value="Remote"> Remote </MenuItem>
+        <MenuItem value="On Site"> Plumber </MenuItem>
+        <MenuItem value="Remote"> Electrician </MenuItem>
+        <MenuItem value="Remote"> Home inspector </MenuItem>
+        <MenuItem value="Remote"> Boilermaker </MenuItem>
+        <MenuItem value="Remote"> Landscape designer </MenuItem>
+        <MenuItem value="Remote"> HVAC technician </MenuItem>
+        <MenuItem value="Remote"> Other </MenuItem>
       </Select>
       {/* this is the work place */}
       <Select disableUnderline="true" variant="filled" defaultValue="Melbourne">

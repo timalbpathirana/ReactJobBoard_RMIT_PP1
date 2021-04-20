@@ -34,7 +34,7 @@ export default (props) => {
       <Grid container justify="center">
         <Grid items xs={10}>
           <Box display="flex" justifyContent="space-between">
-            <Typography variant="h5">Huntr - IT Careers </Typography>
+            <Typography variant="h5">Huntr</Typography>
             <ButtonGroup
               variant="text"
               color="primary"
