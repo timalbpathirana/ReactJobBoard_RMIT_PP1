@@ -5,6 +5,7 @@
 2. Duc Nguyen           - Product Owner
 3. Timal Pathirana      - Lead Developer/ Front-End
 4. Xuan Ye              - Developer/ Tester
+5. Yumeng Wang          - Developer
 
 ## How to clone the Repo,
 * Make a empty folder in your computer.
