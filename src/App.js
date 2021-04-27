@@ -5,9 +5,9 @@ import Header from "./Components/Header";
 import SearchBar from "./Components/SearchBar";
 import JobCard from "./Components/Job/JobCard";
 import NewJobModal from "./Components/Job/NewJobModal";
-import jobData from "./dummyData";
 import Login from "./Components/login.js/Login";
 import { firestore, app } from "./firebase/config";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default () => {
   // setting the state
@@ -42,10 +42,14 @@ export default () => {
             <JobCard key={job.id} {...job} />
           ))}
         </Grid>
+        <Router>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+          </Switch>
+        </Router>
       </Grid>
-      <div>
-        <Login />
-      </div>
     </ThemeProvider>
   );
 };
