@@ -53,7 +53,7 @@ export default (props) => {
   ];
 
   return (
-    <Dialog id="formModel" open={false} fullWidth>
+    <Dialog id="formModel" open={props.stateChange} fullWidth>
       <DialogTitle>
         <Box
           width="100%"
@@ -62,7 +62,10 @@ export default (props) => {
           alignItems="center"
         >
           <Typography variant="h5">Post a Job </Typography>
-          <IconButton variant="">
+          <IconButton
+            variant=""
+            onClick={() => props.changeStateOnClose(false)}
+          >
             <CloseIcon />
           </IconButton>
         </Box>
