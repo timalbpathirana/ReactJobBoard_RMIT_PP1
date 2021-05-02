@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Route, BrowserRouter as Router, useHistory } from "react-router-dom";
 import {
   Button,
   Grid,
@@ -8,15 +9,13 @@ import {
   ButtonGroup,
 } from "@material-ui/core";
 import NewJobModal from "../Job/NewJobModal";
-import Login from "../login.js/Login";
+import logo_small from "./logo_small.png";
 
 const useStyle = makeStyles({
   wrapper: {
     // border: "1px solid ",
     backgroundColor: "white",
     display: "flex",
-
-    // & referecing to the class and refer to each elemtn on that box componebt
   },
 });
 
@@ -28,41 +27,58 @@ export default (props) => {
   const setStateOnClose = () => {
     setState(false);
   };
+  // Using useHistory to trigger going back to homepage when user clicks on Huntr
+  const history = useHistory();
   const classes = useStyle();
   return (
-    <Box py={8} bgcolor="secondary.main" color="white">
-      <Grid container justify="center">
-        <Grid items xs={10}>
-          <Box display="flex" justifyContent="space-between">
-            <Typography variant="h5">Huntr</Typography>
-            <ButtonGroup
-              variant="text"
+    <Router>
+      <Box py={8} bgcolor="secondary.main" color="white" justifyItems="center">
+        <Grid
+          container
+          direction="row"
+          justify="space-around"
+          alignItems="center"
+        >
+          <Grid items xs={6}>
+            <Box display="flex">
+              <img
+                src={logo_small}
+                alt="logo"
+                onClick={() => {
+                  history.push("/");
+                }}
+              />
+            </Box>
+          </Grid>
+
+          {/* <Button
+                  variant="contained"
+                  color="primary"
+                  disableLElevationm
+                  onClick={changeState}
+                >
+                  Post a Job
+                </Button> */}
+          <Box display="flex">
+            <Button
+              variant="contained"
               color="primary"
-              aria-label="text primary button group"
-              size="medium"
+              disableLElevation
+              href="/login"
             >
-              <Button
-                variant="contained"
-                color="primary"
-                disableLElevationm
-                onClick={changeState}
-              >
-                Post a Job
-              </Button>
-              <Button variant="contained" color="primary" disableLElevation>
-                Log In
-              </Button>
-            </ButtonGroup>
+              Contractor Login
+            </Button>
           </Box>
         </Grid>
-      </Grid>
-      <div>
-        <NewJobModal
-          stateChange={state}
-          changeStateOnClose={(newState) => setState(newState)}
-        />
-      </div>
-    </Box>
+
+        <div>
+          <NewJobModal
+            stateChange={state}
+            changeStateOnClose={(newState) => setState(newState)}
+          />
+        </div>
+      </Box>
+    </Router>
   );
 };
 

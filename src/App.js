@@ -5,8 +5,8 @@ import Header from "./Components/Header";
 import SearchBar from "./Components/SearchBar";
 import JobCard from "./Components/Job/JobCard";
 import NewJobModal from "./Components/Job/NewJobModal";
-import Login from "./Components/login.js/Login";
-import { firestore, app } from "./firebase/config";
+import { firestore, app } from "./Components/firebase/FirebaseDatabase";
+import Login from "./Components/SignUp/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default () => {
@@ -31,26 +31,30 @@ export default () => {
     fetchJobs();
   }, []);
   return (
-    <ThemeProvider theme={theme}>
-      <Header />
-      <NewJobModal />
-      <Grid container justify="center">
-        <Grid item xs={10}>
-          <SearchBar />
-          {/* fetching from jobs */}
-          {jobs.map((job) => (
-            <JobCard key={job.id} {...job} />
-          ))}
-        </Grid>
-        <Router>
-          <Switch>
-            <Route path="/login">
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Header />
+        <Switch>
+          <Route path="/" exact>
+            <NewJobModal />
+            <Grid container justify="center">
+              <Grid item xs={10}>
+                <SearchBar />
+                {/* fetching from jobs */}
+                {jobs.map((job) => (
+                  <JobCard key={job.id} {...job} />
+                ))}
+              </Grid>
+            </Grid>
+          </Route>
+          <Route path="/login" exact>
+            <Grid>
               <Login />
-            </Route>
-          </Switch>
-        </Router>
-      </Grid>
-    </ThemeProvider>
+            </Grid>
+          </Route>
+        </Switch>
+      </ThemeProvider>
+    </Router>
   );
 };
 // source - https://www.youtube.com/watch?v=L2RnP5vhbdg
