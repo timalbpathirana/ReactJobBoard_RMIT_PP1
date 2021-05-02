@@ -7,6 +7,7 @@ import Footer from "./Components/Footer";
 import SearchBar from "./Components/SearchBar";
 import JobCard from "./Components/Job/JobCard";
 import NewJobModal from "./Components/Job/NewJobModal";
+import ViewJobModal from "./Components/Job/ViewJobModal";
 
 import Login from "./Components/login.js/Login";
 import { firestore, app } from "./firebase/config";
@@ -15,6 +16,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 export default () => {
   // setting the state
   const [jobs, setJobs] = useState([]);
+  const [ViewJob, setViewJob] = useState({});
   // fetching the jobs from database when user loads the website.
   const fetchJobs = async () => {
     const req = await firestore
@@ -37,12 +39,13 @@ export default () => {
     <ThemeProvider theme={theme}>
       <Header />
       <NewJobModal />
+      <ViewJobModal job={ViewJob} closeModal ={() => setViewJob({})}/>
       <Grid container justify="center">
         <Grid item xs={10}>
           <SearchBar />
           {/* fetching from jobs */}
           {jobs.map((job) => (
-            <JobCard key={job.id} {...job} />
+            <JobCard open={() => setViewJob(job)} key={job.id} {...job} />
           ))}
         </Grid>
         <Router>
@@ -53,12 +56,6 @@ export default () => {
           </Switch>
         </Router>
       </Grid>
-      <Button variant="contained" color="primary" onClick = {() => setButtonPopup(true)} >
-                Temp Job Apply Button
-              </Button>
-      <Form trigger={buttonPopup} setTrigger ={setButtonPopup}>
-        <h1>this is form</h1>
-      </Form>
       <Footer />
     </ThemeProvider>
   );
