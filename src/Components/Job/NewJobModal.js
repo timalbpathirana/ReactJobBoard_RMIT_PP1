@@ -15,6 +15,7 @@ import {
   FormControl,
   FormHelperText,
   IconButton,
+  CircularProgress,
 } from "@material-ui/core";
 
 // Importing the Icons from Material UI icon package
@@ -40,6 +41,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initState ={
+  title: "",
+  type: "Full time",
+  companyName:"",
+  location: "Remote",
+  link:"",
+  description:"",
+  skills: [],
+
+};
+
 export default (props) => {
   const classes = useStyles();
   const skills = [
@@ -50,6 +62,16 @@ export default (props) => {
     "Firebase",
     "MongoDB",
     "SQL",
+    
+    const [loading,setLoading] = useState(false);
+    const[jobDtails, setJobDetails] = useState(initState);
+
+    const handleChange = (e) =>}
+    e.persist()
+    setJobDetails(oldState) =>({
+      ...oldState,
+      [e.target.name]: e.target.value,
+    }));
   ];
 
   return (
@@ -182,10 +204,55 @@ export default (props) => {
             * Retuired Fields
           </Typography>
           <Button variant="outlined" color="secondary">
-            Post Job
+          
+            {loading?(
+              <CircularProgress color = "secondary" size={22}/>
+            ) :(
+              "Post Job"
+            ) }
           </Button>
         </Box>
       </DialogActions>
     </Dialog>
   );
 };
+  
+const handleChange = (e) => {
+  e.persist();
+  setJobDetails(oldState) => ({
+    ...oldState,
+    [e.target.name]: e.target.value,
+  }));
+};
+
+
+const addRemoveSkill = (skill) =>
+jobDetails.skill.includes(skill) 
+?setJobDetails(oldState) =>({
+  ...oldState,
+  skills: oldState.skills.filter((s) => s != skill),
+}))
+setJobDetails(oldState)=>({
+  ...oldState,
+  skills: oldState.skills.concat(skill), 
+}));
+
+
+const handleSubmit = async () => {
+  for(const field in jobDetails){
+    if(typeof jobDetails.[fields] == 'string' && !jobDetails.[fields]) return console.log('not validated')
+  }
+  if(!jobDatils.skills.length) return;  //choose at least one skill
+  return console.log('validated');
+  setLoading(true);
+  await props postJobs(jobDetails);
+  closeModal();
+};
+
+const closeModal =() => {
+  setJobDetails(initState);
+  setLoading(false);
+  props.closeModal();
+};
+
+
