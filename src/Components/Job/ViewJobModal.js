@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
     Button,
     Grid,
@@ -18,6 +18,7 @@ import {
   } from "@material-ui/core";
 import {Close as CloseIcon} from '@material-ui/icons';
 import { format } from 'date-fns';
+import ApplyJob from "../Job/ApplyJob";
 
 const useStyles = makeStyles((theme) =>({
     info:{
@@ -40,7 +41,13 @@ const useStyles = makeStyles((theme) =>({
 
 export default props => {
     const classes = useStyles();
-
+    const [state, setState] = useState(false);
+    const changeState = () => {
+        setState(true);
+      };
+      const setStateOnClose = () => {
+        setState(false);
+      };
     return(
     <Dialog open={!!Object.keys(props.job).length} fullWidth>
         <dialogTitle>
@@ -89,7 +96,14 @@ export default props => {
 
         </DialogContent>
         <DialogActions>
-            <Button variant="outlined" component="a" href={props.job.link} target="_blank">Apply</Button>
+            <Button variant="outlined" component="a" onClick={changeState}>Apply</Button>
         </DialogActions>
+        <div>
+        <ApplyJob
+          stateChange={state}
+          changeStateOnClose={(newState) => setState(newState)}
+        />
+      </div>
     </Dialog>
+    
 )}
