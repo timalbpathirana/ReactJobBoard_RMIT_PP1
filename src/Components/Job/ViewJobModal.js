@@ -53,11 +53,12 @@ export default props => {
         </dialogTitle>
         <DialogContent>
             <Box>
-                // Here has a problem when running, i think it beacuse the database do not enter Time data, if u want to running successful, please temp delete this box
+                {/*// Here has a problem when running, i think it beacuse the database do not enter Time data, if u want to running successful, please temp delete this box
                 <box className ={classes.info} display="flex">
                     <Typography variant ="caption">Posted on: </Typography>
                     <Typography variant ="body2">{props.job.postedOn && format(props.job.postedOn, "dd/MMM/yyyy HH:MM")}</Typography>
-                </box>                                                                                              
+                </box>
+                */}                                                                                              
                 <box className ={classes.info} display="flex">
                     <Typography variant ="caption">Job type: </Typography>
                     <Typography variant ="body2">{props.job.type}</Typography>
