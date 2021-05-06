@@ -7,7 +7,11 @@ import JobCard from "./Components/Job/JobCard";
 import NewJobModal from "./Components/Job/NewJobModal";
 import jobData from "./dummyData";
 import { firestore } from "firebase";
+<<<<<<< Updated upstream
 import close as CloseIcon {} from 'material-ui/icons'; 
+=======
+//import close as CloseIcon {} from 'material-ui/icons'; 
+>>>>>>> Stashed changes
 
 export default () => {
   const [jobs, setJobs] = useState([]);
@@ -84,7 +88,11 @@ const postJob = async(jobDetails) => {
            customSearch &&
            <Box my = {2} display = "flex" justifyContent="felx-end">
                <Button onClick={fetchJobs}>
+<<<<<<< Updated upstream
                  <closeIcon size = [20]/>
+=======
+                 <closeIcon size = {20}/>
+>>>>>>> Stashed changes
                  Custom Search 
                </Button>    
             </Box>)
