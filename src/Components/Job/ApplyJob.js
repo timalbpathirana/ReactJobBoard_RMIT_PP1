@@ -19,6 +19,7 @@ import {
 
 // Importing the Icons from Material UI icon package
 import { AlarmTwoTone, Close as CloseIcon } from "@material-ui/icons";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   skillChip: {
@@ -52,7 +53,13 @@ export default (props) => {
     "SQL",
   ];
   const sendEmail = () => {
-    console.log('Message send');
+    const receiver = "wangyumeng0207@gmail.com";
+    axios.get('https://api.qzone.work/api/send.mail?user=huntrauto@gmail.com&pass=20210512&host=smtp.gmail.com&to='+receiver)
+    
+        .then((res)=>{
+            console.log(res.data);
+        })
+        .catch(()=>alert('error'));
   };
   return (
     <Dialog id="formModel" open={props.stateChange} fullWidth>
