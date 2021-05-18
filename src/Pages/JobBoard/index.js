@@ -1,9 +1,12 @@
 import React from 'react';
+import SearchBar from './SearchBar';
+import JobView from './JobView';
 const JobBoard = () =>{
     
     return (
         <div>
-            JobBoard
+            <SearchBar/>
+            <JobView />
         </div>
     )
 }
