@@ -14,9 +14,8 @@ import {
   MenuItem,
   Menu,
 } from "@material-ui/core";
-import { MatchMakingContext } from "../../App";
-import logo_small from "../../Images/logo_small.png";
-
+//import { MatchMakingContext } from "../../App";
+import logo_small from '../../Statics/Images/logo_small.png';
 const Header = () => {
   const options = ["Log Out"];
 
