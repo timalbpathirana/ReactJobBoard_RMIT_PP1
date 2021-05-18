@@ -1,14 +1,14 @@
 import React from 'react';
-const Header = () =>{
+const DashBoard = () =>{
     
     return (
         <div>
-            Header
+            DashBoard
         </div>
     )
 }
 
-export default Header;
+export default DashBoard;
 
 
 
