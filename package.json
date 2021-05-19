@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "date-fns": "^2.15.0",
     "firebase": "^7.19.0",
+    "jwt-decode": "^3.1.2",
     "nodemailer": "^6.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

@@ -6,19 +6,12 @@ import {
     Typography,
     makeStyles,
     Dialog,
-    Select,
-    MenuItem,
-    DialogTitle,
     DialogContent,
     DialogActions,
-    FilledInput,
-    FormControl,
-    FormHelperText,
     IconButton,
   } from "@material-ui/core";
 import {Close as CloseIcon} from '@material-ui/icons';
-import { format } from 'date-fns';
-import ApplyJob from "../Job/ApplyJob";
+
 
 const useStyles = makeStyles((theme) =>({
     info:{
@@ -99,10 +92,7 @@ export default props => {
             <Button variant="outlined" component="a" onClick={changeState}>Apply</Button>
         </DialogActions>
         <div>
-        <ApplyJob
-          stateChange={state}
-          changeStateOnClose={(newState) => setState(newState)}
-        />
+    
       </div>
     </Dialog>
     
