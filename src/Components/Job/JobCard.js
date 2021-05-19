@@ -1,12 +1,8 @@
 import React from "react";
 import { Button, Grid, Box, Typography, makeStyles } from "@material-ui/core";
-import { RedoRounded, RepeatOutlined } from "@material-ui/icons";
-import userEvent from "@testing-library/user-event";
-import theme from "../../theme/theme";
-import { differenceInHours, differenceInMinutes } from "date-fns";
+import { differenceInHours} from "date-fns";
 
-// const skills = ["Javascript", "React.js", "Node.js"];
-// below method is the way to access the theme styles
+
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     border: "1px solid #e8e8e8",
@@ -19,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   companyName: {
-    padding: "6px",
     fontSize: "13px",
     color: "white",
     backgroundColor: theme.palette.lightSecondary.main,
@@ -49,13 +44,8 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-export default (props) => {
-  // function formatDate() {
-  //   const str = props.postedOn;
-  //   const res = str.split(" ");
-  //   console.log(res[1]);
-  //}
 
+const JobCard = (props) =>{
   const classes = useStyles();
   return (
     <Box p={2} className={classes.wrapper}>
@@ -85,7 +75,7 @@ export default (props) => {
           <Grid item>
             <Box mt={2}>
               <Button onClick = {props.open} variant="outlined" color="secondary">
-                CHECK{" "}
+                CHECK
               </Button>
             </Box>
           </Grid>
@@ -93,4 +83,10 @@ export default (props) => {
       </Grid>
     </Box>
   );
-};
+}
+
+export default JobCard
+
+
+
+

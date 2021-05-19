@@ -2,49 +2,55 @@ import React from "react";
 import {
   Grid,
   Box,
-  Typography,
-  makeStyles,
+  Link,
+  Container,
 } from "@material-ui/core";
 
-const useStyle = makeStyles({
-  wrapper: {
-    // border: "1px solid ",
-    backgroundColor: "white",
-    display: "flex",
-    
 
-    // & referecing to the class and refer to each elemtn on that box componebt
-  },
-});
-export default (props) => {
-  const classes = useStyle();
-  return (
-    <Box py={8} bgcolor="secondary.main" color="white">
-      <Grid container justify="center">
-        <Grid items xs={3}>
-          <Typography variant="h5">Tools 
-            <ul>
-              <li><a href=''>Profile</a></li>
-              <li><a href=''>Company Reviews</a></li>
-            </ul>
-            </Typography>
-        </Grid>
-        <Grid items xs={3}>
-            <Typography variant="h5">Teams 
-            <ul>
-              <li><a href=''>About our Team</a></li>
-              <li><a href=''>Contact us</a></li>
-            </ul>
-            </Typography></Grid>
-        <Grid items xs={3}>
-            <Typography variant="h5">
-            <strong>Information</strong> and <strong>Copyright</strong></Typography>
-            <Typography variant="h8">
-              <p>Powered by Node.js, MongoDB, and React.</p>
-              <p>You may view the <a href='https://github.com/timalbpathirana/ReactJobBoard_RMIT_PP1'>Source Code</a> behind this project on GitHub.</p>
-              <p>© 2021 PP1-Teams-10</p>
-            </Typography></Grid>
-      </Grid>
-    </Box>
-  );
-};
+
+const Footer = () =>{
+    return(
+        <Box px={{xs:3,sm:10}} py={{xs:5,sm:10}} bgcolor="secondary.main" color="white">
+            <Container maxWidth="lg">
+                <Grid container spacing={5}>
+                    <Grid item xs={12} sm={4}>
+                        <Box borderBottom={1}>Tools</Box>
+                        <Box>
+                            <Link href="/" color="inherit">Profile</Link>
+                        </Box>
+                        <Box>
+                            <Link href="/" color="inherit">Company Reviews</Link>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Box borderBottom={1}>Teams</Box>
+                        <Box>
+                            <Link href="/" color="inherit">About our Team</Link>
+                        </Box>
+                        <Box>
+                            <Link href="/" color="inherit">Contact us</Link>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <Box borderBottom={1}><strong>Information</strong> and <strong>Copyright</strong></Box>
+                        <Box>
+                            Powered by Node.js, MongoDB, and React
+                        </Box>
+                        <Box>
+                            You may view the <Link href='https://github.com/timalbpathirana/ReactJobBoard_RMIT_PP1' >Source Code</Link> behind this project on GitHub
+                        </Box>
+                    </Grid>
+                </Grid>
+                <Box textAlign = "center" pt={{xs:5,sm:10}} pb = {{xs:5,sm:0}}>
+                        Huntr Workshop &reg;{new Date().getFullYear()}  PP1-Teams-10
+                </Box>
+            </Container>
+        </Box>
+    )
+}
+
+
+
+
+
+export default Footer
