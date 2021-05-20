@@ -23,6 +23,7 @@ import {
 } from "@material-ui/core";
 
 import { AlarmTwoTone, Close as CloseIcon } from "@material-ui/icons";
+import apikeys from "./apikeys";
 
 const ApplyJob = (props) =>{
   const useStyles = makeStyles(theme => ({
@@ -75,6 +76,8 @@ const ApplyJob = (props) =>{
     }
   );
 
+  //Need to change it to firebase not test server
+  //s
   const handleSubmit = evt => {
     evt.preventDefault();
 
@@ -90,6 +93,13 @@ const ApplyJob = (props) =>{
       .then(response => response.json())
       .then(response => console.log("Success:", JSON.stringify(response)))
       .catch(error => console.error("Error:", error));
+
+    emailjs.sendForm(apikeys.SERVICE_ID, apikeys.TEMPLATE_ID, evt.target, apikeys.USER_ID)
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
   };
   const handleInput = evt => {
     const name = evt.target.name;
