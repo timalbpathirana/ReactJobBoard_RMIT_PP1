@@ -45,7 +45,7 @@ const Registration = (props) => {
     return (
         <div>
             <div className="register-form">
-                <form onSubmit={handleSubmit}>
+                <form className="register-form" onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col-md-3">
                             <label>First Name</label>
