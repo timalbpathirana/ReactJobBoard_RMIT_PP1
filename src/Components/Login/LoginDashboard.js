@@ -17,8 +17,7 @@ const LoginDashboard = () => {
         field: '',
         userStatus: '',
     });
-    const { userLogIn } = useContext(MatchMakingContext);
-    const [loggedInUser, setLoggedInUser] = userLogIn;    
+    const { userLogIn } = useContext(MatchMakingContext);   
     const history = useHistory();
     const location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };     
@@ -26,7 +25,7 @@ const LoginDashboard = () => {
     initializeLoginFramework();
     const handleResponse = (res, redirect) => {
         // setUser(res);
-        setLoggedInUser(res);
+        userLogIn.setLoggedInUser(res);
         localStorage.setItem('currentuser', JSON.stringify(res));
         if (redirect) {            
             history.replace(from);

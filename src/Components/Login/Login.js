@@ -53,23 +53,24 @@ const Login = (props) => {
                     <div className="row">
                         <div className="col-md-6">
                             <label>E-mail / Username</label>
-                            <input className="form-control" type="text" name="email" placeholder="E-mail / Username" onBlur={handleBlur} />
+                            <input className="form-control" type="text" id="email" name="email" placeholder="E-mail / Username" onBlur={handleBlur} />
                         </div>
                         {!forgetPassword &&
                             <div className="col-md-6">
                                 <label>Password</label>
                                 <div className="input-group">
-                                    <input className="form-control" type={!showPassword ? "password" : "text"} name="password" placeholder="Password" onBlur={handleBlur} /><div className="input-group-text"><span onClick={() => setShowPassword(!showPassword)}><FontAwesomeIcon icon={!showPassword ? faEyeSlash : faEye} /></span></div>
+                                    <input className="form-control" type={!showPassword ? "password" : "text"} id="password" name="password" placeholder="Password" onBlur={handleBlur} /><div className="input-group-text"><span onClick={() => setShowPassword(!showPassword)}><FontAwesomeIcon icon={!showPassword ? faEyeSlash : faEye} /></span></div>
                                 </div>
-                            </div>}
+                            </div>
+                        }
                         <div className="col-md-12">
                             <div className="custom-control custom-checkbox">
                                 <input type="checkbox" onChange={() => setForgetPassword(!forgetPassword)} className="custom-control-input" id="forgetpassword" />
-                                <label className="custom-control-label" for="forgetpassword">Forget Password</label>
+                                <label className="custom-control-label" htmlFor="forgetpassword">Forget Password</label>
                             </div>
                         </div>
                         <div className="col-md-12">
-                            <button className="btn mt-4 border-dark text-danger">Submit</button>
+                            <button className="submitRegorLogin">Submit</button>
                         </div>
                     </div>
                 </form>
