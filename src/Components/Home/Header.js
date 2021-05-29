@@ -4,6 +4,7 @@ import logo_small from "../../Images/logo_small.png";
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Clock from 'react-live-clock';
 
 import {
     Button,
@@ -21,6 +22,7 @@ import { MatchMakingContext } from '../../App';
 
 
 const Header = () => {
+    
     const options = [
         'Log Out',
     ];
@@ -139,7 +141,7 @@ const Header = () => {
                                 </div>
                             }
                             title={loggedInUser.name}
-                            subheader={<Typography className={classes.subColor}>{date.toLocaleString()}</Typography>}
+                            subheader={<Typography className={classes.subColor}>{date.toDateString()}<br></br><Clock format={'HH:mm:ss A'} ticking={true} timezone={'Australia/Brisbane'} /></Typography>}
                         />}
                 </Box>
             </Grid>

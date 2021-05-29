@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { MatchMakingContext } from '../../App';
 import { firestore } from '../Login/firebase.config';
+import JobCard from './JobCard';
 
 const useStyle = makeStyles({
     wrapper: {
@@ -39,12 +40,12 @@ const SearchBar = () => {
             let Posts = [];
             firestoreData.map(item => {
                 const itemData = { ...item.data(), id: item.id }
-                const destructureData = { field: itemData.field, location: itemData.location, lowerBudget: itemData.lowerBudget, upperBudget: itemData.upperBudget, description: itemData.description, id: itemData.id }
+                const destructureData = { name: itemData.name, field: itemData.field, location: itemData.location, lowerBudget: itemData.lowerBudget, upperBudget: itemData.upperBudget, description: itemData.description, id: itemData.id }
                 Posts.push(destructureData)
             })
             setJobPosts(Posts)
         })
-    }, []);
+    }, [isUpdated]);
 
     const jobPostByFilter = (name, value) => {
         firestore.collection("jobPost").where(name, "==", value)
@@ -53,42 +54,43 @@ const SearchBar = () => {
                 let Posts = [];
                 firestoreData.map(item => {
                     const itemData = { ...item.data(), id: item.id }
-                    const destructureData = { field: itemData.field, location: itemData.location, lowerBudget: itemData.lowerBudget, upperBudget: itemData.upperBudget, description: itemData.description, id: itemData.id }
+                    const destructureData = { name: itemData.name, field: itemData.field, location: itemData.location, lowerBudget: itemData.lowerBudget, upperBudget: itemData.upperBudget, description: itemData.description, id: itemData.id }
                     Posts.push(destructureData)
                 })
-                setJobPosts(Posts)                
+                setJobPosts(Posts)
             });
     }
 
     const handleFieldChange = (event) => {
-        setField({ name: 'field', value: event.target.value });
+        setField(event.target.value);
         jobPostByFilter('field', event.target.value)
-
     };
 
     const handleLocationChange = (event) => {
-        setLocation({ name: 'location', value: event.target.value });
+        setLocation(event.target.value);
         jobPostByFilter('location', event.target.value)
-
     };
 
     const handleJobTypeChange = (event) => {
-        setJobType({ name: 'type', value: event.target.value });
-
+        setJobType(event.target.value);
+        if(event.target.value.length === 0){
+            setIsUpdated(Math.random()) 
+        }
     };
 
     const handleSearch = () => {
-        if (location.value.length === 0 && field.value.length === 0) {
-            alert('Don,t have any post')
+        if (location.length === 0 && field.length === 0) {
+            alert('Please fill the criteria field')
+            setIsUpdated(Math.random())
         }
-        else if (location.value.length === 0 && field.value.length > 0) {
-            jobPostByFilter(field.name, field.value)
+        else if (location.length === 0 && field.length > 0) {
+            jobPostByFilter('field', field)
         }
-        else if (location.value.length > 0 && field.value.length === 0) {
-            jobPostByFilter(location.name, location.value)
+        else if (location.length > 0 && field.length === 0) {
+            jobPostByFilter('location', location)
         }
-        else if (location.value.length > 0 && field.value.length > 0) {
-            firestore.collection("jobPost").where(field.name, "==", field.value).where(location.name, "==", location.value).onSnapshot((querySnapshot) => {
+        else if (location.length > 0 && field.length > 0) {
+            firestore.collection("jobPost").where('field', "==", field).where('location', "==", location).onSnapshot((querySnapshot) => {
                 const firestoreData = querySnapshot.docs
                 let Posts = [];
                 firestoreData.map(item => {
@@ -99,9 +101,6 @@ const SearchBar = () => {
                 setJobPosts(Posts)
             });
         }
-
-
-
     }
 
     const classes = useStyle();
@@ -137,34 +136,7 @@ const SearchBar = () => {
                     SEARCH
                 </Button>
             </Box>
-            <div className="table-responsive">
-                <table className="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th>SL No</th>
-                            <th>Location</th>
-                            <th>Field</th>
-                            <th>Budget</th>
-                            <th>Description</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            jobPosts.map((item, index) =>
-                                <tr>
-                                    <td>{index + 1}</td>
-                                    <td>{item.location}</td>
-                                    <td>{item.field}</td>
-                                    <td>{item.lowerBudget}$ to {item.upperBudget}$</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            )
-                        }
-
-                    </tbody>
-                </table>
-            </div>
+            {jobPosts.map(item => <JobCard item={item} />)}
         </div>
     );
 };
