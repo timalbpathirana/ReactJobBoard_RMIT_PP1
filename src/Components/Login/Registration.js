@@ -49,7 +49,7 @@ const Registration = (props) => {
                     <div className="row">
                         <div className="col-md-3">
                             <label>First Name</label>
-                            <input className="form-control" type="text" name="firstName" placeholder="First Name" onBlur={handleBlur} required />
+                            <input className="form-control" type="text" id="firstName" name="firstName" placeholder="First Name" onBlur={handleBlur} required />
                             <div className="invalid-feedback">Please Fill a valid first name</div>
                         </div>
                         <div className="col-md-3">
@@ -58,7 +58,7 @@ const Registration = (props) => {
                             <div className="invalid-feedback">Please Fill a valid last name</div>
                         </div>
                         <div className="col-md-3">
-                            <label for="usersLocation">Location</label>
+                            <label htmlFor="usersLocation">Location</label>
                             <select className="form-control" id="usersLocation" name="location" onBlur={handleBlur} required>
                                 <option selected disabled value="" >Choose...</option>
                                 <option>Melbourne</option>
@@ -68,7 +68,7 @@ const Registration = (props) => {
                             <div className="invalid-feedback">Please select anyone in these field</div>
                         </div>
                         <div className="col-md-3">
-                            <label for="usersMenuField">Speciality in Field</label>
+                            <label htmlFor="usersMenuField">Speciality in Field</label>
                             <select className="form-control" id="usersMenuField" name="field" onBlur={handleBlur} required>
                                 <option selected disabled value="">Choose...</option>
                                 <option>Plumber</option>
@@ -82,7 +82,7 @@ const Registration = (props) => {
                         </div>
                         <div className="col-md-4 my-3">
                             <label>E-mail</label>
-                            <input className="form-control" type="text" name="email" placeholder="E-mail" onBlur={handleBlur} required />
+                            <input className="form-control" type="text" name="email" id="email" placeholder="E-mail" onBlur={handleBlur} required />
                             <div className="invalid-feedback">Please Fill a valid email</div>
                         </div>
 
@@ -105,14 +105,14 @@ const Registration = (props) => {
                         <div className="col-md-10 my-3">
                             <div className="form-check form-check-inline">
                                 <input className="form-check-input" type="radio" name="userStatus" id="contrator" onChange={handleChange} value="Contractor" required />
-                                <label className="form-check-label" for="userStatus">
+                                <label className="form-check-label" htmlFor="userStatus">
                                     Contractor
                                 </label>
                                 <div className="invalid-feedback">Please select anyone</div>
                             </div>
                             <div className="form-check form-check-inline">
                                 <input className="form-check-input" type="radio" name="userStatus" id="contratee" onChange={handleChange} value="Contractee" required />
-                                <label className="form-check-label" for="userStatus">
+                                <label className="form-check-label" htmlFor="userStatus">
                                     Contractee
                                 </label>
                                 <div className="invalid-feedback">Please select anyone</div>
