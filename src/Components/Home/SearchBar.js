@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Button,
     Box,
@@ -6,7 +6,6 @@ import {
     MenuItem,
     makeStyles,
 } from "@material-ui/core";
-import { MatchMakingContext } from '../../App';
 import { firestore } from '../Login/firebase.config';
 import JobCard from './JobCard';
 
@@ -26,15 +25,25 @@ const useStyle = makeStyles({
     },
 });
 
-const SearchBar = () => {
-    const { update } = useContext(MatchMakingContext);
-    const [isUpdated, setIsUpdated] = update;
-    const [jobPosts, setJobPosts] = useState([]);
-    const [jobType, setJobType] = useState([]);
-    const [field, setField] = useState([]);
-    const [location, setLocation] = useState([]);
+const SearchBar = () => {    
+    const [jobPosts, setJobPosts] = useState([]);    
+    const [field, setField] = useState('Electrician');
+    const [location, setLocation] = useState('Melbourne');
+    
+    useEffect(() => {       
+        firestore.collection("jobPost").where('field', "==", 'Electrician').where('location', "==", 'Melbourne').onSnapshot((querySnapshot) => {
+            const firestoreData = querySnapshot.docs
+            let Posts = [];
+            firestoreData.map(item => {
+                const itemData = { ...item.data(), id: item.id }
+                const destructureData = { name: itemData.name, field: itemData.field, location: itemData.location, lowerBudget: itemData.lowerBudget, upperBudget: itemData.upperBudget, description: itemData.description, id: itemData.id }
+                Posts.push(destructureData)
+            })
+            setJobPosts(Posts)
+        })
+    }, []);
 
-    useEffect(() => {
+    const allJobPosts = () => {
         firestore.collection("jobPost").get().then((querySnapshot) => {
             const firestoreData = querySnapshot.docs
             let Posts = [];
@@ -45,9 +54,9 @@ const SearchBar = () => {
             })
             setJobPosts(Posts)
         })
-    }, [isUpdated]);
+    }
 
-    const jobPostByFilter = (name, value) => {
+    const jobFilteredByOneItems = (name, value) => {
         firestore.collection("jobPost").where(name, "==", value)
             .onSnapshot((querySnapshot) => {
                 const firestoreData = querySnapshot.docs
@@ -61,76 +70,87 @@ const SearchBar = () => {
             });
     }
 
+    const jobFilteredByTwoItems = (field, location) => {
+        firestore.collection("jobPost").where('field', "==", field).where('location', "==", location).onSnapshot((querySnapshot) => {
+            const firestoreData = querySnapshot.docs
+            let Posts = [];
+            firestoreData.map(item => {
+                const itemData = { ...item.data(), id: item.id }
+                const destructureData = { name: itemData.name, field: itemData.field, location: itemData.location, lowerBudget: itemData.lowerBudget, upperBudget: itemData.upperBudget, description: itemData.description, id: itemData.id }
+                Posts.push(destructureData)
+            })
+            setJobPosts(Posts)
+        });
+    }
+
     const handleFieldChange = (event) => {
         setField(event.target.value);
-        jobPostByFilter('field', event.target.value)
+        if(location.length === 0 && event.target.value.length > 0){
+            jobFilteredByOneItems('field', event.target.value)
+        }
+        else if(location.length > 0 && event.target.value.length > 0) {
+            jobFilteredByTwoItems(event.target.value, location)
+        }
+        else if(location.length > 0 && event.target.value.length === 0) {
+            jobFilteredByOneItems('location', location)
+        }  
+        else{
+            allJobPosts();
+        }
+
     };
 
     const handleLocationChange = (event) => {
         setLocation(event.target.value);
-        jobPostByFilter('location', event.target.value)
-    };
-
-    const handleJobTypeChange = (event) => {
-        setJobType(event.target.value);
-        if(event.target.value.length === 0){
-            setIsUpdated(Math.random()) 
+        if(field.length === 0 && event.target.value.length > 0){
+            jobFilteredByOneItems('location', event.target.value)
         }
+        else if(field.length > 0 && event.target.value.length > 0) {
+            jobFilteredByTwoItems(field, event.target.value)
+        }
+        else if(field.length > 0 && event.target.value.length === 0) {
+            jobFilteredByOneItems('field', field)
+        }
+        else{
+            allJobPosts();
+        }        
     };
-
+    
     const handleSearch = () => {
         if (location.length === 0 && field.length === 0) {
             alert('Please fill the criteria field')
-            setIsUpdated(Math.random())
+            allJobPosts();           
         }
         else if (location.length === 0 && field.length > 0) {
-            jobPostByFilter('field', field)
+            jobFilteredByOneItems('field', field)
         }
         else if (location.length > 0 && field.length === 0) {
-            jobPostByFilter('location', location)
+            jobFilteredByOneItems('location', location)
         }
         else if (location.length > 0 && field.length > 0) {
-            firestore.collection("jobPost").where('field', "==", field).where('location', "==", location).onSnapshot((querySnapshot) => {
-                const firestoreData = querySnapshot.docs
-                let Posts = [];
-                firestoreData.map(item => {
-                    const itemData = { ...item.data(), id: item.id }
-                    const destructureData = { field: itemData.field, location: itemData.location, lowerBudget: itemData.lowerBudget, upperBudget: itemData.upperBudget, description: itemData.description, id: itemData.id }
-                    Posts.push(destructureData)
-                })
-                setJobPosts(Posts)
-            });
+            jobFilteredByTwoItems(field, location)            
         }
     }
 
     const classes = useStyle();
     return (
         <div>
-            <Box p={3} mt={-5} className={classes.wrapper}>
-                {/* This is the work type */}
-                <Select disableUnderline="true" variant="filled" defaultValue="" onChange={handleJobTypeChange}>
-                    <MenuItem value=""><em>None</em></MenuItem>
-                    <MenuItem value="Full Time"> Full Time </MenuItem>
-                    <MenuItem value="Part Time"> Part Time </MenuItem>
-                    <MenuItem value="Casual"> Casual </MenuItem>
-                    <MenuItem value="Temp/Contract"> Temp/Contract </MenuItem>
-                </Select>
-                {/* this is the work mode*/}
-                <Select disableUnderline="true" variant="filled" defaultValue="" onChange={handleFieldChange}>
-                    <MenuItem value=""><em>None</em></MenuItem>
-                    <MenuItem value="Plumber"> Plumber </MenuItem>
+            <Box p={3} mt={-5} className={classes.wrapper}>               
+                <Select disableUnderline="true" variant="filled" defaultValue="Electrician" onChange={handleFieldChange}>
                     <MenuItem value="Electrician"> Electrician </MenuItem>
+                    <MenuItem value="Plumber"> Plumber </MenuItem>
                     <MenuItem value="Home inspector"> Home inspector </MenuItem>
                     <MenuItem value="Boilermaker"> Boilermaker </MenuItem>
                     <MenuItem value="Landscape Designer"> Landscape designer </MenuItem>
                     <MenuItem value="Others"> Other </MenuItem>
+                    <MenuItem value=""><em>None</em></MenuItem>
                 </Select>
                 {/* this is the work place */}
-                <Select disableUnderline="true" variant="filled" defaultValue="" onChange={handleLocationChange}>
-                    <MenuItem value=""><em>None</em></MenuItem>
+                <Select disableUnderline="true" variant="filled" defaultValue="Melbourne" onChange={handleLocationChange}>
                     <MenuItem value="Melbourne"> Melbourne </MenuItem>
                     <MenuItem value="Sydney"> Sydney </MenuItem>
                     <MenuItem value="Brisbane"> Brisbane </MenuItem>
+                    <MenuItem value=""><em>None</em></MenuItem>
                 </Select>
                 <Button variant="contained" color="primary" disableLElevation onClick={handleSearch}>
                     SEARCH

@@ -23,7 +23,7 @@ const AllContractee = () => {
 
     const handleDelete = (e, key, email) => {
 
-        fetch('http://localhost:5000/userDelete?email=' + email, {
+        fetch('https://agile-reaches-10761.herokuapp.com/userDelete?email=' + email, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ const AllContractee = () => {
         })
             .then(res => res.json())
             .then(data => {
-                fetch('http://localhost:5000/userDelete?uid=' + data.uid, {
+                fetch('https://agile-reaches-10761.herokuapp.com/userDelete?uid=' + data.uid, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

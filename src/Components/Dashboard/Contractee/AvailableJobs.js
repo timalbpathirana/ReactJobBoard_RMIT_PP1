@@ -5,10 +5,10 @@ const AvailableJobs = (props) => {
     const [jobAvailable, setJobAvailable] = useState([]);
     let jobPosts = [];
     const jobPostsStatus = async () => {
-        await firestore.collection("jobPost").get().then((querySnapshot) => {
+        await firestore.collection("jobPost").get().then((querySnapshot) => {            
             const firestoreData = querySnapshot.docs
             firestoreData.map(item => {
-                const itemData = { ...item.data(), id: item.id }
+                const itemData = { ...item.data(), id: item.id }                
                 const destructureData = { email: itemData.email, name: itemData.name, field: itemData.field, location: itemData.location, lowerBudget: itemData.lowerBudget, upperBudget: itemData.upperBudget, phoneNumber: itemData.phoneNumber, description: itemData.description, id: itemData.id }
                 jobPosts.push(destructureData)
             })

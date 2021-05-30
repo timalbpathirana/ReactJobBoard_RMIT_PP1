@@ -1,7 +1,7 @@
 import app from "firebase/app";
 import "firebase/firestore";
 
-const firebaseConfig = {
+const firebaseConfig = {  
   apiKey: "AIzaSyBoR6Nvw8-wDf1He_u4aYag-xIMwzi7uh4",
   authDomain: "huntrrmit.firebaseapp.com",
   projectId: "huntrrmit",
@@ -13,5 +13,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebase = app.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
-export { firebase, firestore};
+export { firebase, firestore };
 export default firebaseConfig;

@@ -39,6 +39,7 @@ const Header = () => {
     const signOut = () => {
         localStorage.clear();
         sessionStorage.clear();
+        setpageStatus(false)
         setLoggedInUser([]);
         history.push('/')
     }
@@ -48,10 +49,12 @@ const Header = () => {
     };
 
     let date = new Date();
-    const { userLogIn } = useContext(MatchMakingContext);
+    const { userLogIn, userHomepage } = useContext(MatchMakingContext);
     const [loggedInUser, setLoggedInUser] = userLogIn;
-    const history = useHistory();
+    const [pageStatus, setpageStatus] = userHomepage;    
+    
 
+    const history = useHistory();
     const useStyles = makeStyles((theme) => ({
         root: {
             '& > *': {
@@ -81,20 +84,22 @@ const Header = () => {
                             src={logo_small}
                             alt="logo"
                             onClick={() => {
+                                setpageStatus(true)
                                 history.push("/");
                             }}
                         />
-                        {/* {loggedInUser.email &&
+                        {/\S+@\S+\.\S+/.test(loggedInUser.email) && pageStatus &&
                         <div className={classes.root}>
                             <Button
                                 
                                 color="primary"
                                 onClick={() => {
-                                    history.push("/");
+                                    setpageStatus(false)
+                                    history.push("/dashboard");
                                 }}
                             >Dashboard
                             </Button>
-                        </div>} */}
+                        </div>}
                     </Box>
                 </Grid>
 

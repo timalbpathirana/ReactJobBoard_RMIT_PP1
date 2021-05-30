@@ -13,8 +13,9 @@ import MakeAdmin from './MakeAdmin';
 const AdminDashboard = () => {
     let history = useHistory();
     const [selectedMenu, setSelectedMenu] = useState('');
-    const { userLogIn, update } = useContext(MatchMakingContext);
+    const { userLogIn, update, userHomepage } = useContext(MatchMakingContext);
     const [loggedInUser, setLoggedInUser] = userLogIn;
+    const [pageStatus, setpageStatus] = userHomepage;
     const [isUpdated, setIsUpdated] = update;
     const [jobPosts, setJobPosts] = useState([]);    
 
@@ -34,6 +35,7 @@ const AdminDashboard = () => {
     const signOut = () => {
         localStorage.clear();
         sessionStorage.clear();
+        setpageStatus(false)
         setLoggedInUser([]);
         history.push('/')
     }

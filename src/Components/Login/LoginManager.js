@@ -30,6 +30,7 @@ export const createUserWithEmailAndPassword = (firstName, lastName, email, passw
         // alert("Your message has been submitted👍");
       })
       .catch((error) => {
+        console.log(error)
         alert(error.message);        
       });
       updateUserName(firstName, lastName);      
