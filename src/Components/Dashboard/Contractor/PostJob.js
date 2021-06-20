@@ -9,6 +9,8 @@ const containerStyle = {
     width: "auto"
 }
 
+// Contractor posting a job function
+
 const PostJob = () => {
     const { userLogIn } = useContext(MatchMakingContext);
     const [loggedInUser, setLoggedInUser] = userLogIn;

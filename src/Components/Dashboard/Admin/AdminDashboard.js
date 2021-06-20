@@ -19,6 +19,8 @@ const AdminDashboard = () => {
     const [isUpdated, setIsUpdated] = update;
     const [jobPosts, setJobPosts] = useState([]);    
 
+    // getting all the jobs from the firebase and mapping it to fields to display. 
+
     useEffect(() => {
     firestore.collection("jobPost").get().then((querySnapshot) => {
         const firestoreData = querySnapshot.docs
@@ -32,6 +34,7 @@ const AdminDashboard = () => {
     })
 }, [isUpdated]); 
 
+    // Signing out handler
     const signOut = () => {
         localStorage.clear();
         sessionStorage.clear();

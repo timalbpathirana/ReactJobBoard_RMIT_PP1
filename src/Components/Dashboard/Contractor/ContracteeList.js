@@ -8,6 +8,8 @@ const ContracteeList = (props) => {
     const [users, setUsers] = signupUsers;    
     const [contractees, setContractees] = useState([]);
 
+    // Getting the contractee list
+    
     useEffect(() => {
         const contracteeOfContractorField = users.filter(item => item.field === props.userField && item.userStatus === 'Contractee');        
         setContractees(contracteeOfContractorField)

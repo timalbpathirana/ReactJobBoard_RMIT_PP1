@@ -7,6 +7,8 @@ const AllContractors = () => {
     const [isUpdated, setIsUpdated] = update;
     const [contractors, setContractors] = useState([]);    
 
+     // Fetching all the contractors from the database and mapping to fields to display
+   
     useEffect(() => {
         firestore.collection("users").where("userStatus", "==", "Contractor")
             .onSnapshot((querySnapshot) => {
@@ -19,6 +21,8 @@ const AllContractors = () => {
                 setContractors(contratorsData)
             });
     }, [isUpdated])
+
+    // making a GET request to backend server to delete a document and then update the front end on firebase.
 
     const handleDelete = async (e, key, email) => {
 

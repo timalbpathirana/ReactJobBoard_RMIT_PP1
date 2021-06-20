@@ -8,6 +8,7 @@ const AllContractee = () => {
     const [contractees, setContractees] = useState([]);
     
 
+    // Fetching all the contractee from the database and mapping to fields to display
     useEffect(() => {
         firestore.collection("users").where("userStatus", "==", "Contractee")
             .onSnapshot((querySnapshot) => {
@@ -21,6 +22,7 @@ const AllContractee = () => {
             });
     }, [isUpdated])
 
+    // making a GET request to backend server to delete a document and then update the front end on firebase.
     const handleDelete = (e, key, email) => {
 
         fetch('https://agile-reaches-10761.herokuapp.com/userDelete?email=' + email, {

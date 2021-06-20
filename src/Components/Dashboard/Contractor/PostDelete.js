@@ -8,6 +8,8 @@ const PostDelete = () => {
     const [loggedInUser, setLoggedInUser] = userLogIn;
     const [contratorJobPosts, setContratorJobPosts] = useState([]);
     const [isUpdated, setIsUpdated] = update;
+
+    // Delete a job posted  by contractor function
     useEffect(() => {
         firestore.collection("jobPost").where("email", "==", loggedInUser.email)
             .onSnapshot((querySnapshot) => {

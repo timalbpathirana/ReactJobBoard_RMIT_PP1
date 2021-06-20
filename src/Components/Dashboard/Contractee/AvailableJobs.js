@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { firestore } from '../../Login/firebase.config';
 
+// Displaying all the available jobs for contractee and matchmaking function
 const AvailableJobs = (props) => {
     const [jobAvailable, setJobAvailable] = useState([]);
     let jobPosts = [];
