@@ -12,9 +12,10 @@ import NewUserRegistration from './NewUser/NewUserRegistration';
 
 const Dashboard = () => {
     let history = useHistory();
-    const { userLogIn, signupUsers } = useContext(MatchMakingContext);
+    const { userLogIn, signupUsers, userHomepage } = useContext(MatchMakingContext);    
     const [loggedInUser, setLoggedInUser] = userLogIn;
     const [users, setUsers] = signupUsers;
+    const [pageStatus, setpageStatus] = userHomepage;
     const [selectedMenu, setSelectedMenu] = useState('');
     const [userStatus, setUserStatus] = useState([]);
     const [userField, setUserField] = useState([]);
@@ -29,6 +30,7 @@ const Dashboard = () => {
                 signupUsersdata.push(destructureData)
             })
         });
+        
         const loggedInUserDetails = await signupUsersdata.find(item => item.email === loggedInUser.email);
         if (loggedInUserDetails === undefined) {            
             setUserStatus('NEWUSER')
@@ -56,6 +58,7 @@ const Dashboard = () => {
     const signOut = () => {
         localStorage.clear();
         sessionStorage.clear();
+        setpageStatus(false)
         setLoggedInUser([]);
         history.push('/')
     }

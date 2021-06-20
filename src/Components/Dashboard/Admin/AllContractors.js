@@ -7,6 +7,8 @@ const AllContractors = () => {
     const [isUpdated, setIsUpdated] = update;
     const [contractors, setContractors] = useState([]);    
 
+     // Fetching all the contractors from the database and mapping to fields to display
+   
     useEffect(() => {
         firestore.collection("users").where("userStatus", "==", "Contractor")
             .onSnapshot((querySnapshot) => {
@@ -20,9 +22,11 @@ const AllContractors = () => {
             });
     }, [isUpdated])
 
+    // making a GET request to backend server to delete a document and then update the front end on firebase.
+
     const handleDelete = async (e, key, email) => {
 
-        await fetch('http://localhost:5000/userDelete?email=' + email, {
+        await fetch('https://agile-reaches-10761.herokuapp.com/userDelete?email=' + email, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +34,7 @@ const AllContractors = () => {
         })
             .then(res => res.json())
             .then(data => {                
-                fetch('http://localhost:5000/userDelete?uid=' + data.uid, {
+                fetch('https://agile-reaches-10761.herokuapp.com/userDelete?uid=' + data.uid, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

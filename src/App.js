@@ -1,30 +1,30 @@
-import "./App.css";
-import Header from "./Components/Home/Header";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import React, { createContext, useState } from "react";
-import LoginDashboard from "./Components/Login/LoginDashboard";
-import Home from "./Components/Home/Home";
-import { ThemeProvider } from "@material-ui/styles";
+import './App.css';
+import Header from './Components/Home/Header';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import { createContext, useState } from 'react';
+import LoginDashboard from './Components/Login/LoginDashboard';
+import Home from './Components/Home/Home';
+import { ThemeProvider } from '@material-ui/styles';
 import theme from "./Components/Home/theme/theme";
-import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
-import Dashboard from "./Components/Dashboard/Dashboard";
-import AdminDashboard from "./Components/Dashboard/Admin/AdminDashboard";
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import Dashboard from './Components/Dashboard/Dashboard';
+import AdminDashboard from './Components/Dashboard/Admin/AdminDashboard';
 
 export const MatchMakingContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]); 
+  const [pageStatus, setpageStatus] = useState(false); 
   const [isUpdated, setIsUpdated] = useState([Math.random()]);
-
+   
+  
   return (
-    <MatchMakingContext.Provider
-      value={{
-        userLogIn: [loggedInUser, setLoggedInUser],
-        update: [isUpdated, setIsUpdated],
-        signupUsers: [users, setUsers],
-      }}
-    >
+    <MatchMakingContext.Provider value={{ userLogIn: [loggedInUser, setLoggedInUser], update: [isUpdated, setIsUpdated], signupUsers: [users, setUsers], userHomepage: [pageStatus, setpageStatus] }}>
       <Router>
         <ThemeProvider theme={theme}>
           <Header />
@@ -38,7 +38,7 @@ function App() {
             <Route path="/login">
               <LoginDashboard />
             </Route>
-
+            
             <Route path="/home">
               <Home />
             </Route>

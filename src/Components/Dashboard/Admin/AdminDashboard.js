@@ -13,10 +13,13 @@ import MakeAdmin from './MakeAdmin';
 const AdminDashboard = () => {
     let history = useHistory();
     const [selectedMenu, setSelectedMenu] = useState('');
-    const { userLogIn, update } = useContext(MatchMakingContext);
+    const { userLogIn, update, userHomepage } = useContext(MatchMakingContext);
     const [loggedInUser, setLoggedInUser] = userLogIn;
+    const [pageStatus, setpageStatus] = userHomepage;
     const [isUpdated, setIsUpdated] = update;
     const [jobPosts, setJobPosts] = useState([]);    
+
+    // getting all the jobs from the firebase and mapping it to fields to display. 
 
     useEffect(() => {
     firestore.collection("jobPost").get().then((querySnapshot) => {
@@ -31,9 +34,11 @@ const AdminDashboard = () => {
     })
 }, [isUpdated]); 
 
+    // Signing out handler
     const signOut = () => {
         localStorage.clear();
         sessionStorage.clear();
+        setpageStatus(false)
         setLoggedInUser([]);
         history.push('/')
     }

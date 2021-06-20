@@ -9,6 +9,8 @@ const containerStyle = {
     width: "auto"
 }
 
+// Contractor posting a job function
+
 const PostJob = () => {
     const { userLogIn } = useContext(MatchMakingContext);
     const [loggedInUser, setLoggedInUser] = userLogIn;
@@ -47,7 +49,7 @@ const PostJob = () => {
                     <div className="col-3">
                         <label><b>Name of Location</b></label>
                         <select className="form-control" {...register("location", { required: true })}>
-                            <option selected disabled value="" >Choose...</option>
+                            <option selected value="" >Choose...</option>
                             <option value="Melbourne">Melbourne</option>
                             <option value="Sydney">Sydney</option>
                             <option value="Brisbane">Brisbane</option>
@@ -57,7 +59,7 @@ const PostJob = () => {
                     <div className="col-3">
                         <label><b>Field</b></label>
                         <select className="form-control" {...register("field", { required: true })}>
-                            <option selected disabled value="" >Choose...</option>
+                            <option selected value="" >Choose...</option>
                             <option value="Plumber">Plumber</option>
                             <option value="Electrician">Electrician</option>
                             <option value="Home inspector">Home inspector</option>

@@ -2,6 +2,7 @@ import React from 'react';
 import { firestore } from '../../Login/firebase.config';
 const AllJobPosts = ({jobPosts, setIsUpdated}) => {
 
+    // Implenting delete a job function
     const handleDelete = (e, key) => {
         firestore.collection("jobPost").doc(key).delete().then(() => {
             alert("Document successfully deleted!");

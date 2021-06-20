@@ -9,6 +9,7 @@ const containerStyle = {
     width: "auto"
 }
 
+// Making an admin function
 const MakeAdmin = () => {
     const { update } = useContext(MatchMakingContext);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -30,6 +31,7 @@ const MakeAdmin = () => {
         });
     }, [isUpdated])  
     
+    // deleteting an admin using console
     const handleDelete = (e, key) => {
         firestore.collection("admin").doc(key).delete().then(() => {
             alert("Document successfully deleted!");
@@ -39,6 +41,7 @@ const MakeAdmin = () => {
         });
     }
 
+    // Creating an admin when submit button pressed
     const onSubmit = data => {
         firestore.collection("admin")
             .add({
